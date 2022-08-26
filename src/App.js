@@ -1,7 +1,8 @@
 import './App.css';
 import Todo from './components/Todo';
+import React, { useState } from 'react';
 
-const todoList = [
+const data = [
   {
     id : '001',
     title : 'test01',
@@ -14,15 +15,24 @@ const todoList = [
   },
 ];
 
-function getTodoList() {
-  const gotList = todoList.map((item) => (
-      <Todo {...item}/>
-    ));
-
-    return gotList;
-}
 
 function App() {
+  const [todoList, setTodoList] = useState(data);
+  
+  function getTodoList() {
+    const gotList = todoList.map((item) => (
+        <Todo {...item} onDelete={
+          (id) => {
+            const deletedData = todoList.filter((todo) => {
+              return todo.id !== id;
+            });
+            setTodoList(deletedData);
+          }
+        }/>
+      ));
+  
+      return gotList;
+  }
   return (
     <div className="App">
       <ul className='todoList'>{
