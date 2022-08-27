@@ -1,6 +1,6 @@
 import './App.css';
-import Todo from './components/Todo';
-import React, { useState } from 'react';
+import Todolist from './components/Todolist';
+import React, { useState ,useContext, createContext } from 'react';
 
 const data = [
   {
@@ -15,30 +15,24 @@ const data = [
   },
 ];
 
+export const TodoContext = createContext(data);
 
 function App() {
   const [todoList, setTodoList] = useState(data);
-  
-  function getTodoList() {
-    const gotList = todoList.map((item) => (
-        <Todo {...item} onDelete={
-          (id) => {
-            const deletedData = todoList.filter((todo) => {
-              return todo.id !== id;
-            });
-            setTodoList(deletedData);
-          }
-        }/>
-      ));
-  
-      return gotList;
+
+  function todoDelete(id) {
+    const deletedData = todoList.filter((todo) => {
+      return todo.id !== id;
+    });
+    setTodoList(deletedData);
   }
+  
   return (
-    <div className="App">
-      <ul className='todoList'>{
-      getTodoList()
-      }</ul>
-    </div>
+    <TodoContext.Provider>
+      <div className="App">
+        <Todolist/>
+      </div>
+    </TodoContext.Provider>
   );
 }
 
