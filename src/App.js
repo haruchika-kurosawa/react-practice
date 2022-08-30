@@ -17,9 +17,23 @@ const data = [
   },
 ];
 
-export const TodoContext = createContext(data);
+const testData = [
+  {
+    id : v4(),
+    title : 'test01',
+    state : 'complete',
+  },
+  {
+    id : v4(),
+    title : 'test02',
+    state : 'incomplete',
+  },
+];
+
+export const testContext = createContext();
 
 function App() {
+
   const [todoList, setTodoList] = useState(data);
   const onNewTodo = title => {
     const newTodoList = [
@@ -41,6 +55,7 @@ function App() {
   }
   
   return (
+    <testContext.Provider value={{ testData }}>
     <div className="App">
       <Todolist
       todoList={todoList}
@@ -50,6 +65,7 @@ function App() {
         onNewTodo={onNewTodo}
       />
     </div>
+    </testContext.Provider>
   );
 }
 
