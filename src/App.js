@@ -1,7 +1,7 @@
 import './App.css';
 import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
-import React, { useState ,useContext, createContext } from 'react';
+import React, { useState ,useContext, createContext, useEffect } from 'react';
 import { v4 } from 'uuid';
 
 const data = [
@@ -33,7 +33,7 @@ const testData = [
 export const testContext = createContext();
 
 function App() {
-
+  
   const [todoList, setTodoList] = useState(data);
   const onNewTodo = title => {
     const newTodoList = [
@@ -46,7 +46,7 @@ function App() {
     ];
     setTodoList(newTodoList);
   }
-
+  
   function todoDelete(id) {
     const deletedData = todoList.filter((todo) => {
       return todo.id !== id;
@@ -54,6 +54,16 @@ function App() {
     setTodoList(deletedData);
   }
   
+  console.log('not use useEffect');
+  
+  useEffect(() => {
+    console.log('use useEffect');
+  });
+  
+  useEffect(() => {
+    console.log('use useEffect once');
+  },[]);
+
   return (
     <testContext.Provider value={{ testData }}>
     <div className="App">
