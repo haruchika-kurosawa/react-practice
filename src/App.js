@@ -35,6 +35,7 @@ export const testContext = createContext();
 function App() {
   
   const [todoList, setTodoList] = useState(data);
+  const [count, setCount] = useState(0);
   const onNewTodo = title => {
     const newTodoList = [
       ...todoList,
@@ -45,6 +46,10 @@ function App() {
       }
     ];
     setTodoList(newTodoList);
+  }
+
+  const onCountUp = () => {
+    setCount(count + 1);
   }
   
   function todoDelete(id) {
@@ -64,15 +69,21 @@ function App() {
     console.log('use useEffect once');
   },[]);
 
+  useEffect(() => {
+    console.log('count up');
+  },[count])
+
   return (
     <testContext.Provider value={{ testData }}>
     <div className="App">
+      <p>count: {count}</p>
       <Todolist
       todoList={todoList}
       onDelete={todoDelete}
       />
       <AddForm
         onNewTodo={onNewTodo}
+        onCountUp={onCountUp}
       />
     </div>
     </testContext.Provider>
