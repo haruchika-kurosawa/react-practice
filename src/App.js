@@ -1,8 +1,15 @@
 import './App.css';
 import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 import React, { useState , createContext } from 'react';
 import { v4 } from 'uuid';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  /* other styles */
+`
 
 const data = [
   {
@@ -51,16 +58,19 @@ function App() {
   }
   
   return (
-    <div className="App">
-      <Todolist
-      todoList={todoList}
-      onDelete={todoDelete}
-      changeTitle={changeTitle}
-      />
-      <AddForm
-        onNewTodo={onNewTodo}
-      />
-    </div>
+    <React.Fragment>
+      <GlobalStyle />
+      <div className="App">
+        <Todolist
+        todoList={todoList}
+        onDelete={todoDelete}
+        changeTitle={changeTitle}
+        />
+        <AddForm
+          onNewTodo={onNewTodo}
+        />
+      </div>
+    </React.Fragment>
   );
 }
 
