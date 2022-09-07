@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import styled from 'styled-components';
 
-export default function Todo({title, state, id, changeTitle, onDelete}) {
+export default function Todo({title, state, id, changeTitle, onDelete, changeState}) {
 	const [editing, setEditing] = useState(false);
 	const [value, setValue] = useState(title);
+	const [currentState, setState] = useState(state);
 
 	const Btn = styled.button({
 		border: '1px solid #000',
@@ -23,6 +24,7 @@ export default function Todo({title, state, id, changeTitle, onDelete}) {
 
 	const editComplete = () => {
 		changeTitle(id,value);
+		changeState(id,currentState);
 		setEditing(false);
 	}
 
@@ -38,6 +40,10 @@ export default function Todo({title, state, id, changeTitle, onDelete}) {
 				onChange={e => setValue(e.target.value)}
 				value={value}
 			/>
+			<select value={currentState} onChange={(e) => setState(e.target.value)}>
+				<option value='complete'>complete</option>
+				<option value='incomplete'>incomplete</option>
+			</select>
 			<Btn onClick={editComplete}>change</Btn>
 		</div>
 	);

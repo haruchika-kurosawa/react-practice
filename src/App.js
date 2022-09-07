@@ -56,6 +56,17 @@ function App() {
     });
     setTodoList(changedList);
   }
+
+  const changeState = (id,state) => {
+    const changedList = todoList.map((todo) => {
+      if (id === todo.id) {
+        return {...todo, state};
+      } else {
+        return todo;
+      }
+    });
+    setTodoList(changedList);
+  }
   
   return (
     <React.Fragment>
@@ -65,6 +76,7 @@ function App() {
         todoList={todoList}
         onDelete={todoDelete}
         changeTitle={changeTitle}
+        changeState={changeState}
         />
         <AddForm
           onNewTodo={onNewTodo}
