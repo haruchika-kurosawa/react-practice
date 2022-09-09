@@ -17,10 +17,26 @@ export default function Todo({title, state, id, changeTitle, onDelete, changeSta
 		marginRight: '10px'
 	});
 	
-	const ItemList = styled.li({
-		display: 'block',
-		marginBottom: '5px'
+	const ItemList = styled.li`
+		display: block;
+		margin-bottom: 5px;
+		padding: 5px 0;
+		border-top: 1px solid #000;
+		&:last-of-type {
+			border-bottom: 1px solid #000;
+		}
+	`;
+
+	const Input = styled.input({
+		marginRight: '10px'
 	});
+
+	const Select = styled.select({
+		marginRight: '10px'
+	});
+
+	const EditBox = styled.div`
+	`;
 
 	const editComplete = () => {
 		changeTitle(id,value);
@@ -34,18 +50,18 @@ export default function Todo({title, state, id, changeTitle, onDelete, changeSta
 
 
 	const editingUi = (
-		<div>
-			<input
+		<EditBox>
+			<Input
 				type='text'
 				onChange={e => setValue(e.target.value)}
 				value={value}
 			/>
-			<select value={currentState} onChange={(e) => setState(e.target.value)}>
+			<Select value={currentState} onChange={(e) => setState(e.target.value)}>
 				<option value='complete'>complete</option>
 				<option value='incomplete'>incomplete</option>
-			</select>
+			</Select>
 			<Btn onClick={editComplete}>change</Btn>
-		</div>
+		</EditBox>
 	);
 
 	const displayUi = (

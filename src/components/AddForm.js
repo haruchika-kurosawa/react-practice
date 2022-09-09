@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import {useInput} from '../hook';
 
 export default function AddForm({onNewTodo}) {
@@ -8,16 +9,20 @@ export default function AddForm({onNewTodo}) {
 		onNewTodo(titleProp.value);
 		resetTitle();
 	};
+	const FormWrap = styled.div`
+		margin-top: 15px;
+	`;
+	
 	return (
-		<div>
-		<form onSubmit={submit}>
-			<input
-				value={titleProp.value}
-				onChange={titleProp.onChange}
-				type="text"
-			/>
-			<button>ADD</button>
-		</form>
-		</div>
+		<FormWrap>
+			<form onSubmit={submit}>
+				<input
+					value={titleProp.value}
+					onChange={titleProp.onChange}
+					type="text"
+				/>
+				<button>ADD</button>
+			</form>
+		</FormWrap>
 	)
 }

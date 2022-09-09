@@ -3,7 +3,7 @@ import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import React, { useState , createContext } from 'react';
+import React, { useState } from 'react';
 import { v4 } from 'uuid';
 
 const GlobalStyle = createGlobalStyle`
