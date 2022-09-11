@@ -12,16 +12,27 @@ export default function AddForm({onNewTodo}) {
 	const FormWrap = styled.div`
 		margin-top: 15px;
 	`;
+
+	const Input = styled.input({
+		marginRight: '10px'
+	});
+	const Btn = styled.button({
+		border: '1px solid #000',
+		background: 'none',
+		padding: '10px 20px',
+		marginRight: '10px'
+	});
+
 	
 	return (
 		<FormWrap>
 			<form onSubmit={submit}>
-				<input
+				<Input
 					value={titleProp.value}
 					onChange={titleProp.onChange}
 					type="text"
 				/>
-				<button>ADD</button>
+				<Btn>ADD</Btn>
 			</form>
 		</FormWrap>
 	)
