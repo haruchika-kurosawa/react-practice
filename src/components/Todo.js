@@ -6,12 +6,22 @@ export default function Todo({title, state, id, changeTitle, onDelete, changeSta
 	const [value, setValue] = useState(title);
 	const [currentState, setState] = useState(state);
 
+	
 	const Btn = styled.button({
 		border: '1px solid #000',
 		background: 'none',
 		padding: '10px 20px',
 		marginRight: '10px'
 	});
+	
+	const Btn2 = styled.button({
+		border: '1px solid #000',
+		background: 'none',
+		padding: '10px 20px',
+		marginRight: '10px'
+	});
+	
+	console.log(Btn2);
 
 	const Content = styled.span({
 		marginRight: '10px'
