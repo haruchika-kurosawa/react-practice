@@ -3,7 +3,7 @@ import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 } from 'uuid';
 
 const GlobalStyle = createGlobalStyle`
@@ -27,6 +27,15 @@ const data = [
 function App() {
   
   const [todoList, setTodoList] = useState(data);
+
+  useEffect(() => {
+    console.log('console only once');
+  }, []);
+
+  useEffect(() => {
+    console.log('console on every array change');
+  }, [todoList]);
+
   const onNewTodo = title => {
     const newTodoList = [
       ...todoList,
