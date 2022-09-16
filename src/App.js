@@ -1,16 +1,8 @@
 import './App.css';
 import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { v4 } from 'uuid';
-import { useTest } from './hooks/useTest';
-
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  /* other styles */
-`
 
 const data = [
   {
@@ -28,17 +20,6 @@ const data = [
 function App() {
   
   const [todoList, setTodoList] = useState(data);
-  const { testNum, onClickTestNum } = useTest();
-
-  console.log('testNum', testNum);
-
-  useEffect(() => {
-    console.log('console only once');
-  }, []);
-
-  useEffect(() => {
-    console.log('console on every array change');
-  }, [todoList]);
 
   const onNewTodo = title => {
     const newTodoList = [
@@ -83,7 +64,6 @@ function App() {
   
   return (
     <React.Fragment>
-      <GlobalStyle />
       <div className="App">
         <Todolist
         todoList={todoList}
@@ -95,7 +75,6 @@ function App() {
           onNewTodo={onNewTodo}
         />
       </div>
-      <button onClick={onClickTestNum}>testNum</button>
     </React.Fragment>
   );
 }

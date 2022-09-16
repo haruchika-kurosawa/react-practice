@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {useInput} from '../hook';
+	
+const FormWrap = styled.div`
+margin-top: 15px;
+`;
+
+const Input = styled.input({
+marginRight: '10px'
+});
+const Btn = styled.button({
+border: '1px solid #000',
+background: 'none',
+padding: '10px 20px',
+marginRight: '10px'
+});
 
 export default function AddForm({onNewTodo}) {
 	const [titleProp, resetTitle] = useInput('');
@@ -9,19 +23,7 @@ export default function AddForm({onNewTodo}) {
 		onNewTodo(titleProp.value);
 		resetTitle();
 	};
-	const FormWrap = styled.div`
-		margin-top: 15px;
-	`;
 
-	const Input = styled.input({
-		marginRight: '10px'
-	});
-	const Btn = styled.button({
-		border: '1px solid #000',
-		background: 'none',
-		padding: '10px 20px',
-		marginRight: '10px'
-	});
 
 	
 	return (

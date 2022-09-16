@@ -3,12 +3,13 @@ import Todo from './Todo';
 import styled from 'styled-components';
 
 
+const List = styled.ul({
+	width: '500px',
+	margin: '0 auto'
+});
+
 export default function TodoList({todoList = [], onDelete, changeTitle, changeState}) {
 
-	const List = styled.ul({
-		width: '500px',
-		margin: '0 auto'
-	});
 
 	return (
 		<List>
