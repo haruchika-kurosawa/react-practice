@@ -1,25 +1,13 @@
 import './App.css';
 import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
+import todoData from './data/todo-data.json';
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
 
-const data = [
-  {
-    id : v4(),
-    title : 'test01',
-    state : 'complete',
-  },
-  {
-    id : v4(),
-    title : 'test02',
-    state : 'incomplete',
-  },
-];
-
 function App() {
   
-  const [todoList, setTodoList] = useState(data);
+  const [todoList, setTodoList] = useState(todoData);
 
   const onNewTodo = title => {
     const newTodoList = [
