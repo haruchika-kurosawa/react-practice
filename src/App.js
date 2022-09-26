@@ -1,6 +1,7 @@
 import './App.css';
 import Todolist from './components/Todolist';
 import AddForm from './components/AddForm';
+import Filter from './components/Filter';
 import todoData from './data/todo-data.json';
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
@@ -8,6 +9,7 @@ import { v4 } from 'uuid';
 function App() {
   
   const [todoList, setTodoList] = useState(todoData);
+  const [filter, setFilter] = useState('ALL');
 
   const onNewTodo = title => {
     const newTodoList = [
@@ -15,7 +17,7 @@ function App() {
       {
         id: v4(),
         title: title,
-        state: 'incomplete',
+        state: 'Incomplete',
       }
     ];
     setTodoList(newTodoList);
@@ -49,12 +51,25 @@ function App() {
     });
     setTodoList(changedList);
   }
+
+  const handleFilter = (key) => {
+    setFilter(key);
+  }
+
+  const filteredTodoList = todoList.filter((todo) => {
+    if (filter === 'ALL') return true;
+    if (filter === 'Incomplete') return todo.state === 'Incomplete';
+    if (filter === 'Complete') return todo.state === 'Complete';
+  });
   
   return (
     <React.Fragment>
       <div className="App">
+        <Filter
+        onChange={handleFilter}
+        ></Filter>
         <Todolist
-        todoList={todoList}
+        todoList={filteredTodoList}
         onDelete={todoDelete}
         changeTitle={changeTitle}
         changeState={changeState}

@@ -24,8 +24,6 @@ export default function AddForm({onNewTodo}) {
 		resetTitle();
 	};
 
-
-	
 	return (
 		<FormWrap>
 			<form onSubmit={submit}>
