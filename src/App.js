@@ -1,85 +1,43 @@
-import './App.css';
-import Todolist from './components/Todolist';
-import AddForm from './components/AddForm';
-import Filter from './components/Filter';
-import todoData from './data/todo-data.json';
-import React, { useState } from 'react';
-import { v4 } from 'uuid';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+
+const url = "https://randomuser.me/api/?results=20";
 
 function App() {
-  
-  const [todoList, setTodoList] = useState(todoData);
-  const [filter, setFilter] = useState('ALL');
 
-  const onNewTodo = title => {
-    const newTodoList = [
-      ...todoList,
-      {
-        id: v4(),
-        title: title,
-        state: 'Incomplete',
-      }
-    ];
-    setTodoList(newTodoList);
-  }
+  const [userList, setUserList] = useState([]);
 
-  function todoDelete(id) {
-    const deletedData = todoList.filter((todo) => {
-      return todo.id !== id;
+  useEffect(() => {
+    fetch(url)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setUserList(data.results);
+    })
+    .catch((e) => {
+      console.log(e);
     });
-    setTodoList(deletedData);
-  }
+  }, []);
 
-  const changeTitle = (id,title) => {
-    const changedList = todoList.map((todo) => {
-      if (id === todo.id) {
-        return {...todo, title};
-      } else {
-        return todo;
-      }
-    });
-    setTodoList(changedList);
-  }
-
-  const changeState = (id,state) => {
-    const changedList = todoList.map((todo) => {
-      if (id === todo.id) {
-        return {...todo, state};
-      } else {
-        return todo;
-      }
-    });
-    setTodoList(changedList);
-  }
-
-  const handleFilter = (key) => {
-    setFilter(key);
-  }
-
-  const filteredTodoList = todoList.filter((todo) => {
-    if (filter === 'ALL') return true;
-    if (filter === 'Incomplete') return todo.state === 'Incomplete';
-    if (filter === 'Complete') return todo.state === 'Complete';
-  });
-  
-  return (
-    <React.Fragment>
-      <div className="App">
-        <Filter
-        onChange={handleFilter}
-        ></Filter>
-        <Todolist
-        todoList={filteredTodoList}
-        onDelete={todoDelete}
-        changeTitle={changeTitle}
-        changeState={changeState}
-        />
-        <AddForm
-          onNewTodo={onNewTodo}
-        />
-      </div>
-    </React.Fragment>
-  );
+	return (
+		<React.Fragment>
+			<ul className="App">
+        {userList.map((user, i) => (
+          <li key={i} className="user">
+            <dl className="gender">
+              <dt>gender</dt>
+              <dd>{user.gender}</dd>
+            </dl>
+            <dl className="name">
+              <dt>name</dt>
+              <dd>{user.name.title} {user.name.last} {user.name.first}</dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
+		</React.Fragment>
+	);
 }
 
 export default App;

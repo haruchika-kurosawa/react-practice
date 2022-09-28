@@ -6,8 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // strictModeを付けると良くないコードの検出をしてくれる
-  // その代わり2回Appコンポーネントが実行される
   <React.StrictMode>
     <App />
   </React.StrictMode>
