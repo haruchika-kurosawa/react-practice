@@ -1,11 +1,32 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import User from "./components/User";
+
+// style componentを使う
+import { createGlobalStyle } from 'styled-components';
+// reset.css（box-sizingがなぜかないので下のGlobalStyleで設定する）
+import reset from 'styled-reset';
+// 下で読み込むの忘れないようにする
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  /* other styles */
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
+  html {
+    font-size: 62.5%;
+  }
+  body {
+    font-size: 1.6rem;
+  }
+`;
 
 const url = "https://randomuser.me/api/?results=20";
 
 function App() {
 
   const [userList, setUserList] = useState([]);
+  const [genderFilter, setGenderFilter] = useState('ALL');
 
   useEffect(() => {
     fetch(url)
@@ -22,18 +43,10 @@ function App() {
 
 	return (
 		<React.Fragment>
+      <GlobalStyle />
 			<ul className="App">
         {userList.map((user, i) => (
-          <li key={i} className="user">
-            <dl className="gender">
-              <dt>gender</dt>
-              <dd>{user.gender}</dd>
-            </dl>
-            <dl className="name">
-              <dt>name</dt>
-              <dd>{user.name.title} {user.name.last} {user.name.first}</dd>
-            </dl>
-          </li>
+          <User key={i} user={user}></User>
         ))}
       </ul>
 		</React.Fragment>
