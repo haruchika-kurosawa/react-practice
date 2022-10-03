@@ -1,9 +1,10 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import User from "./components/User";
+import GenderFilter from "./components/GenderFilter";
 
 // style componentを使う
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 // reset.css（box-sizingがなぜかないので下のGlobalStyleで設定する）
 import reset from 'styled-reset';
 // 下で読み込むの忘れないようにする
@@ -21,12 +22,23 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Inner = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+`;
+
 const url = "https://randomuser.me/api/?results=20";
 
 function App() {
 
   const [userList, setUserList] = useState([]);
   const [genderFilter, setGenderFilter] = useState('ALL');
+
+  const filteredList = userList.filter( user => {
+    if (genderFilter === 'ALL') return user;
+    if (genderFilter === user.gender) return user;
+
+  });
 
   useEffect(() => {
     fetch(url)
@@ -44,11 +56,16 @@ function App() {
 	return (
 		<React.Fragment>
       <GlobalStyle />
-			<ul className="App">
-        {userList.map((user, i) => (
+      <Inner>
+      <GenderFilter value={genderFilter} onClick={(select) => {
+        setGenderFilter(select);
+      }}/>
+      <ul className="App">
+        {filteredList.map((user, i) => (
           <User key={i} user={user}></User>
         ))}
       </ul>
+      </Inner>
 		</React.Fragment>
 	);
 }
