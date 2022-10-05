@@ -47,6 +47,17 @@ function App() {
 	const [userList, setUserList] = useState([]);
 	const [genderFilter, setGenderFilter] = useState("ALL");
 
+	const changeRating = (username, newRate) => {
+		const changedList = userList.map(user => {
+			if (user.login.username === username) {
+				return {...user, rating: newRate};
+			} else {
+				return user;
+			}
+		});
+		setUserList(changedList);
+	};
+
 	const filteredList = userList.filter((user) => {
 		if (genderFilter === "ALL") return user;
 		if (genderFilter === user.gender) return user;
@@ -58,7 +69,10 @@ function App() {
 				return res.json();
 			})
 			.then((data) => {
-				setUserList(data.results);
+				const addedRating = data.results.map(user => {
+					return {rating: 0, ...user};
+				});
+				setUserList(addedRating);
 			})
 			.catch((e) => {
 				console.log(e);
@@ -71,7 +85,7 @@ function App() {
 		<React.Fragment>
 			<GlobalStyle />
 			<Inner>
-        <LoadBtn onClick={() => loadData()}>Load</LoadBtn>
+				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
 				<GenderFilter
 					value={genderFilter}
 					onClick={(select) => {
@@ -80,7 +94,7 @@ function App() {
 				/>
 				<ul className="App">
 					{filteredList.map((user, i) => (
-						<User key={i} user={user}></User>
+						<User key={i} user={user} changeRating={changeRating}></User>
 					))}
 				</ul>
 			</Inner>
