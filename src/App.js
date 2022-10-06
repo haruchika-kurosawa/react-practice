@@ -41,7 +41,10 @@ const LoadBtn = styled.button`
 	}
 `;
 
-const url = "https://randomuser.me/api/?results=20";
+// ここを変えられるようにする
+const getNum = 20;
+
+const url = "https://randomuser.me/api/?results=" + getNum;
 
 function App() {
 	const [userList, setUserList] = useState([]);
