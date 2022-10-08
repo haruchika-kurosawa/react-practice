@@ -41,14 +41,11 @@ const LoadBtn = styled.button`
 	}
 `;
 
-// ここを変えられるようにする
-const getNum = 20;
-
-const url = "https://randomuser.me/api/?results=" + getNum;
-
 function App() {
 	const [userList, setUserList] = useState([]);
 	const [genderFilter, setGenderFilter] = useState("ALL");
+	const [getUserNum, setUserNum] = useState(20);
+	const [fetchUrl, setfetchUrl] = useState("https://randomuser.me/api/?results=");
 
 	const changeRating = (username, newRate) => {
 		const changedList = userList.map(user => {
@@ -67,7 +64,7 @@ function App() {
 	});
 
 	const loadData = () => {
-		fetch(url)
+		fetch(fetchUrl+getUserNum)
 			.then((res) => {
 				return res.json();
 			})
@@ -83,6 +80,8 @@ function App() {
 	};
 
 	useEffect(loadData, []);
+
+
 
 	return (
 		<React.Fragment>
