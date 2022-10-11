@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Nest01 from "./Nest01.js";
 
 const Box = styled.li`
 	border: 1px solid #000;
@@ -93,6 +94,7 @@ export default function User(prop) {
 					/>
 				</dd>
 			</Data>
+			<Nest01/>
 		</Box>
 	);
 }

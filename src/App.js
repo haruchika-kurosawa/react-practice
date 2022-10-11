@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
 
@@ -40,6 +40,10 @@ const LoadBtn = styled.button`
 		opacity: 0.5;
 	}
 `;
+
+const sendData = 'context text';
+
+export const TestContext = createContext();
 
 function App() {
 	const [userList, setUserList] = useState([]);
@@ -84,23 +88,25 @@ function App() {
 
 
 	return (
-		<React.Fragment>
-			<GlobalStyle />
-			<Inner>
-				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
-				<GenderFilter
-					value={genderFilter}
-					onClick={(select) => {
-						setGenderFilter(select);
-					}}
-				/>
-				<ul className="App">
-					{filteredList.map((user, i) => (
-						<User key={i} user={user} changeRating={changeRating}></User>
-					))}
-				</ul>
-			</Inner>
-		</React.Fragment>
+		<TestContext.Provider value={{sendData}}>
+			<React.Fragment>
+				<GlobalStyle />
+				<Inner>
+					<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
+					<GenderFilter
+						value={genderFilter}
+						onClick={(select) => {
+							setGenderFilter(select);
+						}}
+					/>
+					<ul className="App">
+						{filteredList.map((user, i) => (
+							<User key={i} user={user} changeRating={changeRating}></User>
+						))}
+					</ul>
+				</Inner>
+			</React.Fragment>
+		</TestContext.Provider>
 	);
 }
 
