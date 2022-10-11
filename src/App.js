@@ -89,23 +89,21 @@ function App() {
 
 	return (
 		<TestContext.Provider value={{sendData}}>
-			<React.Fragment>
-				<GlobalStyle />
-				<Inner>
-					<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
-					<GenderFilter
-						value={genderFilter}
-						onClick={(select) => {
-							setGenderFilter(select);
-						}}
-					/>
-					<ul className="App">
-						{filteredList.map((user, i) => (
-							<User key={i} user={user} changeRating={changeRating}></User>
-						))}
-					</ul>
-				</Inner>
-			</React.Fragment>
+			<GlobalStyle />
+			<Inner>
+				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
+				<GenderFilter
+					value={genderFilter}
+					onClick={(select) => {
+						setGenderFilter(select);
+					}}
+				/>
+				<ul className="App">
+					{filteredList.map((user, i) => (
+						<User key={i} user={user} changeRating={changeRating}></User>
+					))}
+				</ul>
+			</Inner>
 		</TestContext.Provider>
 	);
 }
