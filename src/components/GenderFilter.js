@@ -20,6 +20,8 @@ cursor: pointer;
 transition: 0.5s;
 	&:hover {
 		opacity: 0.5;
+		background: #000;
+		color: #fff;
 	}
 `;
 
