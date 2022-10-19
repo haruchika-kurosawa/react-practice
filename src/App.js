@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
 import Input01 from "./components/Input01";
