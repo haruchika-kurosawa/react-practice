@@ -42,7 +42,6 @@ const LoadBtn = styled.button`
 	}
 `;
 
-const sendData = 'context text';
 
 export const TestContext = createContext();
 
@@ -62,7 +61,15 @@ function App() {
 		});
 		setUserList(changedList);
 	};
+	
+	const sendData = 'context text';
+	const useMemoTest = useMemo(() => ['aaa', 'bbb', 'ccc']);
 
+	useEffect(() => {
+		console.log('useMemoTest');
+	}, [useMemoTest]);
+
+	
 	const filteredList = userList.filter((user) => {
 		if (genderFilter === "ALL") return user;
 		if (genderFilter === user.gender) return user;
