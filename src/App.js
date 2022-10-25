@@ -77,19 +77,17 @@ function App() {
 	});
 
 	const loadData = () => {
-		fetch(fetchUrl+getUserNum)
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
+		(
+			async () => {
+				const res = await fetch(fetchUrl+getUserNum)
+				const data = await res.json();
+
 				const addedRating = data.results.map(user => {
 					return {rating: 0, ...user};
 				});
 				setUserList(addedRating);
-			})
-			.catch((e) => {
-				console.log(e);
-			});
+			}
+		)();
 	};
 
 	useEffect(loadData, []);
