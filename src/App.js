@@ -2,8 +2,6 @@ import "./App.css";
 import React, { useState, useEffect, createContext } from "react";
 import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
-import Input01 from "./components/Input01";
-import Input01 from "./components/Input02";
 
 // style componentを使う
 import styled, { createGlobalStyle } from "styled-components";
@@ -98,8 +96,6 @@ function App() {
 		<TestContext.Provider value={{sendData}}>
 			<GlobalStyle />
 			<Inner>
-				<Input01/>
-				<Input02/>
 				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
 				<GenderFilter
 					value={genderFilter}
