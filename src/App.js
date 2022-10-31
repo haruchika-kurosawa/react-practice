@@ -3,6 +3,7 @@ import React, { useState, useEffect, createContext, useMemo } from "react";
 import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
 import Button from '@mui/material/Button';
+import Slider from './components/Slider';
 
 // style componentを使う
 import styled, { createGlobalStyle } from "styled-components";
@@ -96,8 +97,9 @@ function App() {
 	return (
 		<TestContext.Provider value={{sendData}}>
 			<GlobalStyle />
-			<Button variant="contained">Hello World</Button>
 			<Inner>
+				<Button variant="contained">Hello World</Button>
+				<Slider></Slider>
 				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
 				<GenderFilter
 					value={genderFilter}
