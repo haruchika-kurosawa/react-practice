@@ -4,6 +4,7 @@ import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
 import Button from '@mui/material/Button';
 import Slider from './components/Slider';
+import CountUp from 'react-countup';
 
 // style componentを使う
 import styled, { createGlobalStyle } from "styled-components";
@@ -100,6 +101,7 @@ function App() {
 			<Inner>
 				<Button variant="contained">Hello World</Button>
 				<Slider></Slider>
+				<CountUp duration={5} end={100} />
 				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
 				<GenderFilter
 					value={genderFilter}
