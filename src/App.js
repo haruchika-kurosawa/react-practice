@@ -2,10 +2,6 @@ import "./App.css";
 import React, { useState, useEffect, createContext, useMemo } from "react";
 import User from "./components/User";
 import GenderFilter from "./components/GenderFilter";
-import Button from '@mui/material/Button';
-import Slider from './components/Slider';
-import CountUp from 'react-countup';
-import HamburgerMenu from 'react-hamburger-menu';
 
 // style componentを使う
 import styled, { createGlobalStyle } from "styled-components";
@@ -53,7 +49,6 @@ function App() {
 	const [genderFilter, setGenderFilter] = useState("ALL");
 	const [getUserNum, setUserNum] = useState(20);
 	const [fetchUrl, setfetchUrl] = useState("https://randomuser.me/api/?results=");
-	const [hamburgerState, setHamburgerState] = useState({open: false});
 
 
 	const changeRating = (username, newRate) => {
@@ -68,13 +63,8 @@ function App() {
 	};
 	
 	const sendData = 'context text';
-	const useMemoTest = useMemo(() => ['aaa', 'bbb', 'ccc']);
 
-	useEffect(() => {
-		console.log('useMemoTest');
-	}, [useMemoTest]);
 
-	
 	const filteredList = userList.filter((user) => {
 		if (genderFilter === "ALL") return user;
 		if (genderFilter === user.gender) return user;
@@ -96,30 +86,10 @@ function App() {
 
 	useEffect(loadData, []);
 
-	function handleHamburgerClick() {
-		setHamburgerState({
-			open: !hamburgerState.open
-		});
-	}
-
 	return (
 		<TestContext.Provider value={{sendData}}>
 			<GlobalStyle />
 			<Inner>
-			<HamburgerMenu
-    isOpen={hamburgerState.open}
-    menuClicked={handleHamburgerClick}
-    width={18}
-    height={15}
-    strokeWidth={1}
-    rotate={0}
-    color='black'
-    borderRadius={0}
-    animationDuration={0.5}
-/>
-				<Button variant="contained">Hello World</Button>
-				<Slider></Slider>
-				<CountUp duration={5} end={100} />
 				<LoadBtn onClick={() => loadData()}>Load</LoadBtn>
 				<GenderFilter
 					value={genderFilter}
